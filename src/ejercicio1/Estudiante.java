@@ -1,15 +1,23 @@
+package ejercicio1;
+
+import java.util.Objects;
+
 public class Estudiante {
 
     private String nombre;
     private  String apellido;
     private  String curso;
     private Double calificacion;
+    private int legajo;
+    private static int contador = 1000;
 
     public Estudiante(String nombre, String apellido, String curso, Double calificacion) {
+        contador ++;
         this.nombre = nombre;
         this.apellido = apellido;
         this.curso = curso;
         this.calificacion = calificacion;
+        this.legajo = contador;
     }
 
     public String getNombre() {
@@ -60,5 +68,34 @@ public class Estudiante {
         }else {
             calificacion = 0.0;
         }
+    }
+    @Override
+    public String toString(){
+        return "Estudiante [nombre=" + nombre
+                + ", apellido=" + apellido
+                + ", curso=" + curso
+                + ", calificacion=" + calificacion
+                + ", legajo=" + legajo + "]";
+    }
+
+   //  public boolean equals(Estudiante estudiante){
+    //    return (this.legajo == estudiante.legajo);
+  //}
+    // public int hashCode(){
+
+    // }
+    // Compara los estudiantes por legajo
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;  //estandar
+        if (obj == null || getClass() != obj.getClass()) return false; // estandar
+        Estudiante that = (Estudiante) obj; //that pasa a ser el estudiante
+        return legajo == that.legajo; // compara los legajos ya que es el valor que no se repite
+    }
+
+    // Creo el codigo hash mediante el legajo
+    @Override
+    public int hashCode() {
+        return Objects.hash(legajo); //se crea a partir del legajo ya que el legajo es unico
     }
 }
